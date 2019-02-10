@@ -55,3 +55,12 @@ const ProductSchema = new Schema({
 })
 
 module.exports = Product = mongoose.model('myProduct', ProductSchema)
+
+
+
+/**
+ * make one model for size in that kids size and adult size
+ * In product - Retailer price, retailer minimum order quantity, wholaseller price, wholesaller minimum order quantity, description, stock, quality, GST tax, add button and reset buton.
+ * make one model for image 
+ * 
+ */

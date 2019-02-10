@@ -1,60 +1,44 @@
 
 const express = require('express');
 const router = express.Router();
-const mongoose = require('mongoose');
 const passport = require('passport');
 
-//load Product SubCategory Model
-const ProductSubCategory = require('../../models/Subcategory');
+//load Product size Model
+const Size = require('../../models/Size');
 
 
 // @type   GET
-// @route  /api/productsubcategory
-// @desc   route for getting all products sub category
+// @route  /api/size
+// @desc   route for getting all products size
 // @access PUBLIC
 
 router.get('/', (req, res) => {
-    ProductSubCategory.find()
+    Size.find()
         .sort({ date : 'desc'})
         .then(products =>res.json(products))
         .catch(err => console.log(err))
 });
 
 // @type   POST
-// @route  /api/productsubcategory/
-// @desc   route for submitting products sub category
+// @route  /api/size/
+// @desc   route for submitting products size
 // @access PRIVATE
 
 router.post(
     '/',
     passport.authenticate('jwt', {session: false}),
     (req, res) => {
-      const newProductSubCategory = new ProductSubCategory({
+      const newSize = new Size({
           
-          subCategory : req.body.subCategory
-         
+          adult : req.body.adult,
+          kid : req.body.kid
       });
-      newProductSubCategory
+      newSize
         .save()
         .then(product => res.json(product))
         .catch(err => console.error(err)) 
-        // .catch(err => console.log('Unable to push product')) 
+        // .catch(err => console.log('Unable to push product size')) 
     }  
-)
+);
 
 module.exports = router;
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
